@@ -1,0 +1,3 @@
+symfony php  composer.phar create-project symfony/skeleton:"6.3.*" airfony
+
+move airfony\* .
