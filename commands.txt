@@ -1,3 +1,18 @@
+#
 symfony php  composer.phar create-project symfony/skeleton:"6.3.*" airfony
+//symfony new my_project_directory --version="6.3.*"
 
+#
 move airfony\* .
+
+
+#
+git init
+git commit -m "init"
+git branch -M main
+git remote add origin https://github.com/Tahmurath/AirFony.git
+git push -u origin main
+
+#
+
+
