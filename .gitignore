@@ -1,4 +1,5 @@
-
+# phpstorm project files
+.idea
 ###> symfony/framework-bundle ###
 /.env.local
 /composer.phar
@@ -8,7 +9,7 @@
 /public/bundles/
 /var/
 /vendor/
-/.idea/
+
 ###< symfony/framework-bundle ###
 
 ###> symfony/phpunit-bridge ###

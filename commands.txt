@@ -21,3 +21,6 @@ symfony composer require --dev symfony/profiler-pack
 symfony composer require symfony/orm-pack
 
 #
+
+git branch --delete main
+git branch -m master main
