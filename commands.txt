@@ -5,7 +5,7 @@ symfony php  composer.phar create-project symfony/skeleton:"6.3.*" airfony
 #
 move airfony\* .
 
-
+#export PATH="$PATH:/Applications/Docker.app/Contents/Resources/bin/"
 #
 git init
 git commit -m "init"
@@ -15,4 +15,9 @@ git push -u origin main
 
 #
 
+symfony composer require --dev symfony/test-pack
+symfony composer require --dev symfony/maker-bundle
+symfony composer require --dev symfony/profiler-pack
+symfony composer require symfony/orm-pack
 
+#
