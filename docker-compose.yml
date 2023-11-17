@@ -24,33 +24,37 @@ services:
       - frontend
       - backend
     depends_on:
-      - mysql
+      - mariadb
     environment:
-      MYSQL_HOST: ${MYSQL_HOST}
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MARIADB_HOST: ${MARIADB_HOST}
+      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
+      MARIADB_DATABASE: ${MARIADB_DATABASE}
+      MARIADB_USER: ${MARIADB_USER}
+      MARIADB_PASSWORD: ${MARIADB_PASSWORD}
     volumes:
       - ./:/var/www/html
       - ./docker/php/php.ini:/usr/local/etc/php/conf.d/php.ini
       - ./docker/php/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
-  mysql:
-    container_name: mysql
+  mariadb:
+    container_name: mariadb
     restart: always
-    image: mysql:latest
+    image: mariadb:latest
     networks:
       - backend
     ports:
       - "3306:3306"
+    volumes:
+      - ./mariadb/config:/etc/mysql/conf.d
+      - ./mariadb/backup-volume:/backup
+      - ./mariadb/datadir:/var/lib/mysql:Z
     env_file:
       - ./.env
     environment:
-      MYSQL_HOST: ${MYSQL_HOST}
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MARIADB_HOST: ${MARIADB_HOST}
+      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
+      MARIADB_DATABASE: ${MARIADB_DATABASE}
+      MARIADB_USER: ${MARIADB_USER}
+      MARIADB_PASSWORD: ${MARIADB_PASSWORD}
       
 networks:
   frontend:

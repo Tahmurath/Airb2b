@@ -24,3 +24,10 @@ symfony composer require symfony/orm-pack
 
 git branch --delete main
 git branch -m master main
+
+#
+
+#doctrine:database:create
+
+docker exec -it php symfony console make:migration
+docker exec -it php symfony console doctrine:migrations:migrate
