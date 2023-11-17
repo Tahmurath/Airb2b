@@ -18,6 +18,8 @@ services:
     container_name: php
     build:
       context: ./docker
+    ports:
+      - "8000:8000"
     networks:
       - frontend
       - backend
