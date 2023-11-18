@@ -1,5 +1,8 @@
 # phpstorm project files
 .idea
+/.idea
+/.idea/
+.idea/*
 ###> symfony/framework-bundle ###
 /.env.local
 /composer.phar

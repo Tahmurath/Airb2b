@@ -31,3 +31,9 @@ git branch -m master main
 
 docker exec -it php symfony console make:migration
 docker exec -it php symfony console doctrine:migrations:migrate
+
+
+#
+
+
+symfony server:start --port=8002
