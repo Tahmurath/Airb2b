@@ -37,3 +37,18 @@ docker exec -it php symfony console doctrine:migrations:migrate
 
 
 symfony server:start --port=8002
+
+#
+
+
+symfony console make:entity
+reserve
+
+symfony console make:entity
+
+#
+
+symfony composer require security
+symfony console make:user
+
+symfony console make:migration
