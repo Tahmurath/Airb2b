@@ -50,5 +50,13 @@ symfony console make:entity
 
 symfony composer require security
 symfony console make:user
-
 symfony console make:migration
+
+#
+symfony console make:controller
+ReserveController
+
+#
+symfony composer require orm-fixtures --dev
+
+symfony console doctrine:fixtures:load
