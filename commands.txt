@@ -66,4 +66,14 @@ symfony composer require symfony/serializer
 
 #
 
- symfony console make:serializer:normalizer
+symfony console make:serializer:normalizer
+
+#
+symfony console --env=test doctrine:database:create
+symfony console --env=test doctrine:schema:create
+symfony console --env=test doctrine:fixtures:load
+symfony console make:test
+webtest ReserveTest
+symfony php bin/phpunit
+#
+

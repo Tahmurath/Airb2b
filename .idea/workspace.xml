@@ -7,6 +7,8 @@
     <list default="true" id="1b8eafbc-f866-4e21-b806-156221b99f4a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/commands.txt" beforeDir="false" afterPath="$PROJECT_DIR$/commands.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/ReserveController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ReserveController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Serializer/Normalizer/ReserveNormalizer.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Serializer/Normalizer/ReserveNormalizer.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -132,13 +134,15 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "last_opened_file_path": "/Applications/XAMPP/xamppfiles/htdocs/airfony",
+    "node.js.selected.package.tslint": "(autodetect)"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
       <recent name="C:\laragon\www\symfony63" />
     </key>
   </component>

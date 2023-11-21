@@ -2,15 +2,13 @@
 
 namespace App\Serializer\Normalizer;
 
-use Symfony\Component\Serializer\Normalizer\CacheableSupportsMethodInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 
-class ReserveNormalizer implements NormalizerInterface, CacheableSupportsMethodInterface
+class ReserveNormalizer implements NormalizerInterface
 {
-    public function __construct(private ObjectNormalizer $normalizer)
-    {
-    }
+
 
     public function normalize($object, string $format = null, array $context = []): array
     {
@@ -22,14 +20,13 @@ class ReserveNormalizer implements NormalizerInterface, CacheableSupportsMethodI
 
         return $data;
     }
-
     public function supportsNormalization($data, string $format = null, array $context = []): bool
     {
         return $data instanceof \App\Entity\Reserve;
     }
 
-    public function hasCacheableSupportsMethod(): bool
+    public function getSupportedTypes(?string $format): array
     {
-        return true;
+        return ['json'];
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Reserve;
 use App\Repository\ReserveRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,7 +14,10 @@ use Symfony\Component\Serializer\SerializerInterface;
 class ReserveController extends AbstractController
 {
     #[Route('/reserve', name: 'app_reserve', methods:['GET'])]
-    public function index(ReserveRepository $repo, SerializerInterface $serializer): JsonResponse
+    public function index(
+        ReserveRepository $repo,
+        SerializerInterface $serializer
+    ): JsonResponse
     {
 
         $reserves = $repo->findAll();
@@ -24,4 +28,23 @@ class ReserveController extends AbstractController
             json:true,
         );
     }
+
+    #[Route('/reserve/{id}', name: 'app_reserve_item', methods:['GET'])]
+    public function view(
+        Reserve $reserve
+    ): JsonResponse
+    {
+        return $this->json($reserve);
+    }
+
+    #[Route('/reserve/{id}', name: 'app_reserve_delete', methods:['DELETE'])]
+    public function delete(
+        ReserveRepository $repo,
+        Reserve $reserve
+    ): JsonResponse
+    {
+        $repo->remove($reserve, true);
+        return $this->json('', 204);
+    }
+
 }
