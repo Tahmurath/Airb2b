@@ -60,3 +60,6 @@ ReserveController
 symfony composer require orm-fixtures --dev
 
 symfony console doctrine:fixtures:load
+
+#
+symfony composer require symfony/serializer
