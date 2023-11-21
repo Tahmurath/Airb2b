@@ -63,3 +63,7 @@ symfony console doctrine:fixtures:load
 
 #
 symfony composer require symfony/serializer
+
+#
+
+ symfony console make:serializer:normalizer
