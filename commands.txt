@@ -77,3 +77,5 @@ webtest ReserveTest
 symfony php bin/phpunit
 #
 
+git reset --hard HEAD~1
+
