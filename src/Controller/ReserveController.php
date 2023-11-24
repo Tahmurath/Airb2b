@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use App\Entity\Reserve;
 use App\Repository\ReserveRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
@@ -24,9 +26,22 @@ class ReserveController extends AbstractController
         $json = $serializer->serialize($reserves, 'json',);
         return new JsonResponse(
             data:$json,
-            status: 200,
             json:true,
         );
+    }
+
+    #[Route('/reserve', name: 'app_reserve_create', methods:['POST'])]
+    public function create(
+        EntityManagerInterface $entityManager,
+        SerializerInterface $serializer,
+        Request $request
+    ): JsonResponse
+    {
+        $reserve = $serializer->deserialize($request->getContent(), Reserve::class, 'json');
+        $entityManager->persist($reserve);
+        $entityManager->flush();
+
+        return $this->json($reserve, 201);
     }
 
     #[Route('/reserve/{id}', name: 'app_reserve_item', methods:['GET'])]
