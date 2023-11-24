@@ -21,6 +21,25 @@ class ReserveRepository extends ServiceEntityRepository
         parent::__construct($registry, Reserve::class);
     }
 
+    public function add(Reserve $entity, bool $flush = false): void
+    {
+        $this->getEntityManager()->persist($entity);
+
+        if ($flush) {
+            $this->getEntityManager()->flush();
+        }
+    }
+
+    public function remove(Reserve $entity, bool $flush = false): void
+    {
+        $this->getEntityManager()->remove($entity);
+
+        if ($flush) {
+            $this->getEntityManager()->flush();
+        }
+    }
+
+
 //    /**
 //     * @return Reserve[] Returns an array of Reserve objects
 //     */

@@ -19,6 +19,9 @@ class Reserve
     #[ORM\Column]
     private ?\DateTimeImmutable $updated_at = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $reserve_title = null;
+
     public function __construct()
     {
         $this->setCreatedAt(new \DateTimeImmutable());
@@ -50,6 +53,18 @@ class Reserve
     public function setUpdatedAt(\DateTimeImmutable $updated_at): static
     {
         $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+    public function getReserveTitle(): ?string
+    {
+        return $this->reserve_title;
+    }
+
+    public function setReserveTitle(string $reserve_title): static
+    {
+        $this->reserve_title = $reserve_title;
 
         return $this;
     }

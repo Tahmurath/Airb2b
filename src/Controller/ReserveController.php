@@ -32,14 +32,13 @@ class ReserveController extends AbstractController
 
     #[Route('/reserve', name: 'app_reserve_create', methods:['POST'])]
     public function create(
-        EntityManagerInterface $entityManager,
+        ReserveRepository $repo,
         SerializerInterface $serializer,
         Request $request
     ): JsonResponse
     {
         $reserve = $serializer->deserialize($request->getContent(), Reserve::class, 'json');
-        $entityManager->persist($reserve);
-        $entityManager->flush();
+        $repo->add($reserve, true);
 
         return $this->json($reserve, 201);
     }

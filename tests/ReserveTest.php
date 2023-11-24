@@ -18,7 +18,21 @@ class ReserveTest extends WebTestCase
             ],
             content: json_encode([])
         );
-        $this->assertSame(201, $client->getResponse()->getStatusCode());
+        $response = $client->getResponse();
+
+        $this->assertResponseIsSuccessful();
+        $this->assertSame(201, $response->getStatusCode());
+        $this->assertJson($response->getContent());
+
+
+        $json = $response->getContent();
+        $array = json_decode($json);
+
+        //dd($array);
+
+        //$this->assertEquals('1_hamid',$array[0]?->id);
+
+        $this->assertStringContainsString('createdAt',$json);
 
     }
     public function testSomething(): void
@@ -49,4 +63,35 @@ class ReserveTest extends WebTestCase
         $this->assertStringContainsString('createdAt',$json);
 //        $this->assertSelectorTextContains('h1', 'Hello World');
     }
+
+    public function testDelete(): void
+    {
+        $client = static::createClient();
+        $client->request(
+            method: 'DELETE',
+            uri: '/reserve/15',
+            server: [
+                'HTTP_ACCEPT' => 'application/json',
+                'CONTENT_TYPE' => 'application/json',
+            ],
+            content: json_encode([])
+        );
+        $response = $client->getResponse();
+
+        $this->assertResponseIsSuccessful();
+        $this->assertSame(204, $response->getStatusCode());
+        //$this->assertJson($response->getContent());
+
+
+        $json = $response->getContent();
+        $array = json_decode($json);
+
+        //dd($array);
+
+        //$this->assertEquals('1_hamid',$array[0]?->id);
+
+        //$this->assertStringContainsString('createdAt',$json);
+
+    }
+
 }
