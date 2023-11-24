@@ -24,7 +24,8 @@ class ReserveNormalizer implements NormalizerInterface
 
         // TODO: add, edit, or delete some data
         // just test if its executing
-//        $data['id'] = $data['id'].'_hamid';
+        //$data['id'] = $data['id'].'_hamid';
+        //unset($data['createdAt'], $data['updatedAt']);
 
         return $data;
     }
