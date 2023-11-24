@@ -6,6 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class ReserveTest extends WebTestCase
 {
+    public static int $reserve_id;
+
     public function testCreate(): void
     {
         $client = static::createClient();
@@ -16,7 +18,7 @@ class ReserveTest extends WebTestCase
                 'HTTP_ACCEPT' => 'application/json',
                 'CONTENT_TYPE' => 'application/json',
             ],
-            content: json_encode([])
+            content: json_encode(['reserve_title'=>'TheTestTitle'])
         );
         $response = $client->getResponse();
 
@@ -26,16 +28,21 @@ class ReserveTest extends WebTestCase
 
 
         $json = $response->getContent();
-        $array = json_decode($json);
+        $reserve = json_decode($json);
 
-        //dd($array);
+        static::$reserve_id = $reserve->id;
 
-        //$this->assertEquals('1_hamid',$array[0]?->id);
-
+//        dd($this->reserve_id);
         $this->assertStringContainsString('createdAt',$json);
 
+        $this->assertEquals('TheTestTitle',$reserve?->reserveTitle);
+
     }
-    public function testSomething(): void
+
+    /**
+     * @depends testCreate
+     */
+    public function testIndex(): void
     {
         $client = static::createClient();
         //$crawler = $client->request('GET', '/reserve');
@@ -57,19 +64,24 @@ class ReserveTest extends WebTestCase
 
         $this->assertResponseIsSuccessful();
 
-        //$this->assertObjectHasProperty('createdAt',$array[0]);
-        $this->assertEquals('1_hamid',$array[0]?->id);
-
         $this->assertStringContainsString('createdAt',$json);
+
+        //$this->assertObjectHasProperty('createdAt',$array[0]);
+        //$this->assertEquals('TheTestTitle',$array[0]?->reserveTitle);
+
+
 //        $this->assertSelectorTextContains('h1', 'Hello World');
     }
 
+    /**
+     * @depends testCreate
+     */
     public function testDelete(): void
     {
         $client = static::createClient();
         $client->request(
             method: 'DELETE',
-            uri: '/reserve/15',
+            uri: '/reserve/'.static::$reserve_id,
             server: [
                 'HTTP_ACCEPT' => 'application/json',
                 'CONTENT_TYPE' => 'application/json',
@@ -83,8 +95,8 @@ class ReserveTest extends WebTestCase
         //$this->assertJson($response->getContent());
 
 
-        $json = $response->getContent();
-        $array = json_decode($json);
+//        $json = $response->getContent();
+//        $array = json_decode($json);
 
         //dd($array);
 
