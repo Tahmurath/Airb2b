@@ -22,7 +22,8 @@ class ReserveController extends AbstractController
     {
 
         $reserves = $repo->findAll();
-        $json = $serializer->serialize($reserves, 'json',);
+        //$reserves = $serializer->normalize($reserves, null, ['datetime_format' => 'Y-m-d']);
+        $json = $serializer->serialize($reserves, 'json');
         return new JsonResponse(
             data:$json,
             json:true,

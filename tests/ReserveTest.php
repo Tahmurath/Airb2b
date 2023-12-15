@@ -97,6 +97,8 @@ class ReserveTest extends WebTestCase
         $this->assertResponseIsSuccessful();
 
         $this->assertStringContainsString('createdAt',$json);
+        //dd($array[0]->reserveTitle);
+        $this->assertEquals('TheUpdatedTestTitle',$array[0]->reserveTitle);
 
         //$this->assertObjectHasProperty('createdAt',$array[0]);
         //$this->assertEquals('TheTestTitle',$array[0]?->reserveTitle);

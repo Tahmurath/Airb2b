@@ -81,5 +81,9 @@ symfony php bin/phpunit
 symfony console doctrine:migrations:migrate --env=test
 
 
+#
 
+symfony console doctrine:database:drop --env=test --force
+
+#
 

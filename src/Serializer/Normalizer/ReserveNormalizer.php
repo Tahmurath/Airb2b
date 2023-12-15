@@ -20,12 +20,18 @@ class ReserveNormalizer implements NormalizerInterface
 
     public function normalize($object, string $format = null, array $context = []): array
     {
+//        $data = $this->normalizer->normalize($object, null, [
+//            'datetime_format' => 'Y-m-d H:i'
+//        ]);
         $data = $this->normalizer->normalize($object, $format, $context);
+
+        //dd($context);
 
         // TODO: add, edit, or delete some data
         // just test if its executing
         //$data['id'] = $data['id'].'_hamid';
         //unset($data['createdAt'], $data['updatedAt']);
+
 
         return $data;
     }

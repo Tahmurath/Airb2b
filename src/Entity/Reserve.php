@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\ReserveRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Context;
+use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 
 #[ORM\Entity(repositoryClass: ReserveRepository::class)]
 class Reserve
@@ -14,9 +16,14 @@ class Reserve
     private ?int $id = null;
 
     #[ORM\Column]
+    #[Context([DateTimeNormalizer::FORMAT_KEY => 'Y-m-d'])]
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column]
+    #[Context(
+        normalizationContext: [DateTimeNormalizer::FORMAT_KEY => 'Y-m-d'],
+        denormalizationContext: [DateTimeNormalizer::FORMAT_KEY => \DateTime::RFC3339],
+    )]
     private ?\DateTimeImmutable $updatedAt = null;
 
     #[ORM\Column(length: 255)]
