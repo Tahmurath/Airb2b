@@ -25,7 +25,9 @@ class ReserveNormalizer implements NormalizerInterface
 //        ]);
         $data = $this->normalizer->normalize($object, $format, $context);
 
-        //dd($context);
+//        dd($data);
+        //$data['createdBy'] = $object->getCreatedBy() ? $object->getCreatedBy()->getId() : null;
+        $data['createdBy'] = $object->getCreatedBy()?->getId();
 
         // TODO: add, edit, or delete some data
         // just test if its executing
@@ -52,7 +54,7 @@ class ReserveNormalizer implements NormalizerInterface
     public function getSupportedTypes(?string $format): array
     {
         return [
-            //'object' => null,             // Doesn't support any classes or interfaces
+            'object' => null,             // Doesn't support any classes or interfaces
             //'*' => false,                 // Supports any other types, but the result is not cacheable
             Reserve::class => true, // Supports MyCustomClass and result is cacheable
         ];

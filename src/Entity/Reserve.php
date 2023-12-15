@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\ReserveRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Context;
+use Symfony\Component\Serializer\Annotation\Ignore;
 use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 
 #[ORM\Entity(repositoryClass: ReserveRepository::class)]
@@ -28,6 +29,11 @@ class Reserve
 
     #[ORM\Column(length: 255)]
     private ?string $reserveTitle = null;
+
+    #[ORM\ManyToOne(inversedBy: 'reserves')]
+    #[ORM\JoinColumn(nullable: false)]
+    #[Ignore]
+    private ?User $createdBy = null;
 
     public function __construct()
     {
@@ -72,6 +78,18 @@ class Reserve
     public function setReserveTitle(string $reserveAitle): static
     {
         $this->reserveTitle = $reserveAitle;
+
+        return $this;
+    }
+
+    public function getCreatedBy(): ?User
+    {
+        return $this->createdBy;
+    }
+
+    public function setCreatedBy(?User $createdBy): static
+    {
+        $this->createdBy = $createdBy;
 
         return $this;
     }
