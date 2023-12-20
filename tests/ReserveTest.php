@@ -2,11 +2,35 @@
 
 namespace App\Tests;
 
+use App\Entity\User;
+use Doctrine\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class ReserveTest extends WebTestCase
 {
     public static int $reserve_id;
+    public static int $user_id;
+
+
+    private function createUser(ObjectManager $manager): int
+    {
+        $user = new User();
+        $user->setEmail('test@test.con');
+        $user->setRoles([
+            'ROLE_ROOT','ROLE_ADMIN', 'ROLE_MANAGE'
+        ]);
+        $hashedPassword = $this->passwordHasher->hashPassword(
+            $user,
+            '123456'
+        );
+        $user->setPassword($hashedPassword);
+        $manager->persist($user);
+
+        $manager->flush();
+
+        static::$user_id = $user->getId();
+        return $user->getId();
+    }
 
     public function testCreate(): void
     {
@@ -18,7 +42,10 @@ class ReserveTest extends WebTestCase
                 'HTTP_ACCEPT' => 'application/json',
                 'CONTENT_TYPE' => 'application/json',
             ],
-            content: json_encode(['reserveTitle'=>'TheTestTitle'])
+            content: json_encode([
+                'reserveTitle'=>'TheTestTitle',
+                'createdBy' => $this->createUser()
+            ])
         );
         $response = $client->getResponse();
 
